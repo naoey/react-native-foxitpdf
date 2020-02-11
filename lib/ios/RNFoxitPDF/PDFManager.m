@@ -220,54 +220,38 @@ RCT_EXPORT_METHOD(openPDF:(NSString *)src
     return [NSURL fileURLWithPath:filePath];
 }
 
-- (FSClientInfo *)getClientInfo {
-    FSClientInfo *client_info = [[FSClientInfo alloc] init];
-    client_info.device_id = [[UIDevice currentDevice] identifierForVendor].UUIDString;
-    client_info.device_name = [UIDevice currentDevice].name;
-    client_info.device_model = [[UIDevice currentDevice] model];
-    client_info.mac_address = @"mac_address";
-    client_info.os = [NSString stringWithFormat:@"%@ %@",
-                      [[UIDevice currentDevice] systemName], [[UIDevice currentDevice] systemVersion]];
-    client_info.product_name = @"RDK";
-    client_info.product_vendor = @"Foxit";
-    client_info.product_version = @"5.2.0";
-    client_info.product_language = [[NSLocale preferredLanguages] objectAtIndex:0];
-    
-    return client_info;
-}
-
 //panelConfig
 - (void) setPanelConfig: (NSDictionary *) config
 {
     _panelConfig = config;
-    
+
     if (_panelConfig != NULL) {
         id val = [_panelConfig objectForKey:@"readingBookmark"] ;
-        
+
         if (val != NULL) {
             [self.extensionsManager.panelController setPanelHidden:![val boolValue] type:FSPanelTypeReadingBookmark];
         }
-        
+
         val = [_panelConfig objectForKey:@"outline"] ;
-        
+
         if (val != NULL) {
             [self.extensionsManager.panelController setPanelHidden:![val boolValue] type:FSPanelTypeOutline];
         }
-        
+
         val = [_panelConfig objectForKey:@"annotation"] ;
-        
+
         if (val != NULL) {
             [self.extensionsManager.panelController setPanelHidden:![val boolValue] type:FSPanelTypeAnnotation];
         }
-        
+
         val = [_panelConfig objectForKey:@"attachments"] ;
-        
+
         if (val != NULL) {
             [self.extensionsManager.panelController setPanelHidden:![val boolValue] type:FSPanelTypeAttachment];
         }
-        
+
         val = [_panelConfig objectForKey:@"signature"] ;
-        
+
         if (val != NULL) {
             [self.extensionsManager.panelController setPanelHidden:![val boolValue] type:FSPanelTypeDigitalSignature];
         }

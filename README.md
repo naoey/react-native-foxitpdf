@@ -26,53 +26,18 @@ npm install @foxitsoftware/react-native-foxitpdf
 ```
 Please use foxitpdfsdk_(version_no)_ios.zip from https://developers.foxitsoftware.com/pdf-sdk/ios/
 
-2.Create a `FoxitPDF.podspec` file and place it in the `libs` folder
-
-```
-pod spec create FoxitPDF
-```
-```
-<PROJECT_ROOT>/ios/libs/FoxitPDF.podspec
-```
-FoxitPDF.podspec example 
-```ruby
-# coding: utf-8
-# Copyright (c) Foxit Software Inc..
-
-Pod::Spec.new do |s|
-s.name           = 'FoxitPDF'
-s.version        = '7.1.0'
-s.summary        = 'Foxit PDF SDK provides high-performance libraries to help any software developer add robust PDF functionality to their enterprise, mobile and cloud applications across all platforms (includes Windows, Mac, Linux, Web, Android, iOS, and UWP), using the most popular development languages and environments. Application developers who use Foxit PDF SDK can leverage Foxit’s powerful, standard-compliant PDF technology to securely display, create, edit, annotate, format, organize, print, share, secure, search documents as well as to fill PDF forms. Additionally, Foxit PDF SDK includes a built-in, embeddable PDF Viewer, making the development process easier and faster. For more detailed information, please visit the website https://developers.foxitsoftware.com/pdf-sdk/'
-s.author         = 'Foxit Software Incorporated'
-s.homepage       = 'https://developers.foxitsoftware.com/pdf-sdk/ios/'
-s.platform       = :ios, '9.0'
-s.license        = 'MIT'
-s.source         = { :git => '' }
-s.subspec 'FoxitRDK' do |ss|
-ss.source_files  = 'FoxitRDK.framework/Headers/**.h'
-ss.public_header_files =  'FoxitRDK.framework/Headers/**.h'
-ss.vendored_frameworks = 'FoxitRDK.framework'
-end
-s.subspec 'uiextensionsDynamic' do |ss|
-ss.source_files  =  'uiextensionsDynamic.framework/Headers/**.h',
-ss.public_header_files =   'uiextensionsDynamic.framework/Headers/**.h'
-ss.vendored_frameworks =  'uiextensionsDynamic.framework'
-ss.dependency 'FoxitPDF/FoxitRDK'
-end
-end
-```
-3. Add `FoxitPDF` to `<PROJECT_ROOT>/ios/Podfile` 
+2. Add `FoxitPDF` to `<PROJECT_ROOT>/ios/Podfile` 
 ```ruby
 pod 'FoxitPDF', :path=>'./libs/FoxitPDF.podspec'
 ```
-4.
+3.
 ```
 cd <PROJECT_ROOT>/ios && pod install
 ```
 
 ## Integration for Android
 
-1. Download foxit_mobile_pdf_sdk_android_en.zip from [https://developers.foxitsoftware.com/pdf-sdk/android/] (Please use Foxit PDF SDK for Android 7.1.0 )
+1. Download foxit_mobile_pdf_sdk_android_en.zip from [https://developers.foxitsoftware.com/pdf-sdk/android/] (Please use Foxit PDF SDK for Android 7.2.0 )
 
 2. Unzip `foxitpdfsdk_(version_no)_android.zip` and copy libs folder into the component android folder.
 /xxx/platforms/android/
@@ -115,7 +80,7 @@ In your root `android/app/build.gradle`:
     dependencies {
         implementation fileTree(dir: "libs", include: ["*.jar"])
         implementation "com.facebook.react:react-native:+"  // From node_modules
-+       implementation 'com.android.support:multidex:1.0.+'
++       implementation 'androidx.multidex:multidex:2.0.1'
     
         if (enableHermes) {
           def hermesPath = "../../node_modules/hermesvm/android/";
@@ -259,6 +224,8 @@ const styles = StyleSheet.create({
 
 	FoxitPDF.openDocument(String, String) // path and password
 ## Versions
+>[v7.2.0](https://github.com/foxitsoftware/react-native-foxitpdf/tree/release/7.2)
+
 >[v7.1.0](https://github.com/foxitsoftware/react-native-foxitpdf/tree/release/7.1)
 
 >[v7.0.0](https://github.com/foxitsoftware/react-native-foxitpdf/tree/release/7.0)
@@ -277,7 +244,7 @@ const styles = StyleSheet.create({
 
 ## License
 
-     Copyright (c) 2019 Foxit Corporation
+     Copyright (c) 2020 Foxit Corporation
 
      Licensed under the The MIT License (MIT) (the "License");
      you may not use this file except in compliance with the License.

@@ -1,3 +1,14 @@
+/**
+ * Copyright (C) 2003-2020, Foxit Software Inc..
+ * All Rights Reserved.
+ * <p>
+ * http://www.foxitsoftware.com
+ * <p>
+ * The following code is copyrighted and is the proprietary of Foxit Software Inc.. It is not allowed to
+ * distribute any parts of Foxit PDF SDK to third party or public without permission unless an agreement
+ * is signed between Foxit Software Inc. and customers to explicitly grant customers permissions.
+ * Review legal.txt for additional license and legal information.
+ */
 package com.foxitreader;
 
 import android.content.Intent;
@@ -13,6 +24,8 @@ import com.foxit.sdk.common.Constants;
 import com.foxit.sdk.common.Library;
 import com.foxit.uiextensions.config.Config;
 
+import androidx.annotation.NonNull;
+
 public class ReactPDFManager extends ReactContextBaseJavaModule {
 
     private static final String REACT_CLASS = "PDFManager";
@@ -26,6 +39,7 @@ public class ReactPDFManager extends ReactContextBaseJavaModule {
         super(reactContext);
     }
 
+    @NonNull
     @Override
     public String getName() {
         return REACT_CLASS;

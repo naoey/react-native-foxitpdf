@@ -162,8 +162,8 @@ RCT_EXPORT_METHOD(openPDF:(NSString *)src
             [self.pdfViewCtrl openDoc:targetURL.path password:password completion:^(FSErrorCode error) {
                 if (error == FSErrSuccess) {
                     if (!weakSelf.rootViewController.presentingViewController) {
-                        
-                        [[[UIApplication sharedApplication].delegate window].rootViewController presentViewController:weakSelf.rootViewController animated:YES completion:^{
+                        weakSelf.rootViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+                        [[weakSelf getForegroundActiveWindow].rootViewController presentViewController:weakSelf.rootViewController animated:YES completion:^{
 
                         }];
                     }
@@ -183,6 +183,19 @@ RCT_EXPORT_METHOD(openPDF:(NSString *)src
             };
         }
     });
+}
+
+- (UIWindow *)getForegroundActiveWindow{
+    #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 130000
+    if (@available(iOS 13.0, *)) {
+        for (UIWindowScene *wScene in [UIApplication sharedApplication].connectedScenes){
+            if (wScene.activationState == UISceneActivationStateForegroundActive){
+                return wScene.windows.firstObject;
+            }
+        }
+    }
+    #endif
+    return [[[UIApplication sharedApplication] delegate] window];
 }
 
 -(void)showError:(NSString *)errMsg {
@@ -491,7 +504,8 @@ RCT_EXPORT_METHOD(openPDF:(NSString *)src
                                if (weakSelf.rootViewController.presentingViewController) {
                                     [weakSelf.rootViewController dismissViewControllerAnimated:NO completion:nil];
                                }
-                               [[[UIApplication sharedApplication].delegate window].rootViewController presentViewController:weakSelf.rootViewController animated:NO completion:^{
+                               weakSelf.rootViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+                               [[weakSelf getForegroundActiveWindow].rootViewController presentViewController:weakSelf.rootViewController animated:NO completion:^{
 
                                }];
                            } else if (error == FSErrDeviceLimitation) {
